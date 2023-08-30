@@ -1,0 +1,42 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label t("activerecord.attributes.task.title") %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label t("activerecord.attributes.task.content")%>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline_on %>
+    <%= form.date_field :deadline_on %>
+  </div>
+
+  <div class="field">
+      <%= form.label :priority %>
+      <%= form.select :priority, options_for_select(['Faible', 'Moyenne', 'Elevee']), include_blank: true %>
+  </div>
+
+  <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, options_for_select(['Non_démarré', 'Démarré', 'Terminé']), include_blank: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit  %>
+  </div>
+<% end %>
